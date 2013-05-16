@@ -182,7 +182,7 @@ namespace Endava.DependencyGraph
                     {
                         switch (b.UserData.ToString())
                         {
-                            case "FirstNode":
+                            case "node3":
                                 color = Colors.Blue;
                                 break;
                             case "SecondNode":

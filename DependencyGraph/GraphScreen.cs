@@ -113,7 +113,7 @@ namespace Endava.DependencyGraph
             {
                 for (int j = 0; j < employlist.Count; j++)
                 {
-                    if ((employlist[j].Value != true) && (employlist[i].Key != employlist[j].Key))
+                    if ((employlist[j].Value != true) && (employlist[i].Key.Name != employlist[j].Key.Name))
                     {
                         float lenght = CalculateNodeDistance(employlist[i].Key, employlist[j].Key);
 
@@ -127,7 +127,7 @@ namespace Endava.DependencyGraph
                     }
                 }
 
-                employlist1[i] = new KeyValuePair<Employ, bool>(employlist1[i].Key, true);
+                employlist[i] = new KeyValuePair<Node, bool>(employlist[i].Key, true);
             }
 
             base.LoadContent();
@@ -139,7 +139,38 @@ namespace Endava.DependencyGraph
             float Pers1CommonSkillTotal = 0;
             float Pers2CommonSkillTotal = 0;
 
-            foreach (var skill in pers1.Attributes)
+            List<AttributeSkill> pers1attr = pers1.Attributes.OfType<AttributeSkill>().ToList();
+            List<AttributeSkill> pers2attr = pers2.Attributes.OfType<AttributeSkill>().ToList();
+
+            for (int i = 0; i < pers1attr.Count; i++)
+            {
+                if (pers2attr.Exists(e => e.Name == pers1attr[i].Name))                       
+                {
+                    Pers1CommonSkillTotal += pers1attr[i].Weight ?? 0;
+                    Pers2CommonSkillTotal += (pers2attr.Where(w => w.Name == pers1attr[i].Name)).FirstOrDefault().Weight ?? 0;
+                }
+            }
+
+            if (Pers1CommonSkillTotal == 0 || Pers2CommonSkillTotal == 0)
+            {
+                return 0;
+            }
+
+            float pers1SkillSum = pers1attr.Sum(s => s.Weight) ?? 0;
+            float pers2SkillSum = pers2attr.Sum(s => s.Weight) ?? 0;
+
+            double result = (pers1.Size * pers2.Size) / ((Pers1CommonSkillTotal / pers1SkillSum) * (Pers2CommonSkillTotal / pers2SkillSum));
+
+            return (float)System.Math.Sqrt(result * correction);
+        }
+
+        public float CalculateNodeDistance(Employ pers1, Employ pers2)
+        {
+            const float correction = 1;
+            float Pers1CommonSkillTotal = 0;
+            float Pers2CommonSkillTotal = 0;
+
+            foreach (var skill in pers1.Skills)
             {
                 if (pers2.Skills.ContainsKey(skill.Key))
                 {
@@ -177,7 +208,7 @@ namespace Endava.DependencyGraph
             Pers3.Experience = 5;
             Pers3.Skills = new Dictionary<string, int>();
             Pers3.Skills.Add("Java", 3);
-         
+
 
             Employ Pers4 = new Employ("Joe");
             Pers4.Experience = 6;

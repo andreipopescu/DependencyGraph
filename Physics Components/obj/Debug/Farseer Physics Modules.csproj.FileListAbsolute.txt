@@ -7,3 +7,12 @@ C:\Users\apopescu\Desktop\DependencyGraph\Physics Components\bin\Debug\Farseer_P
 C:\Users\apopescu\Desktop\DependencyGraph\Physics Components\obj\Debug\Farseer Physics Modules.csprojResolveAssemblyReference.cache
 C:\Users\apopescu\Desktop\DependencyGraph\Physics Components\obj\Debug\Physics Components.dll
 C:\Users\apopescu\Desktop\DependencyGraph\Physics Components\obj\Debug\Physics Components.pdb
+D:\DependencyGraph\Physics Components\bin\Debug\Physics Components.dll
+D:\DependencyGraph\Physics Components\bin\Debug\Physics Components.pdb
+D:\DependencyGraph\Physics Components\bin\Debug\DebugView.dll
+D:\DependencyGraph\Physics Components\bin\Debug\Farseer_Physics_Engine.dll
+D:\DependencyGraph\Physics Components\bin\Debug\DebugView.pdb
+D:\DependencyGraph\Physics Components\bin\Debug\Farseer_Physics_Engine.pdb
+D:\DependencyGraph\Physics Components\obj\Debug\Farseer Physics Modules.csprojResolveAssemblyReference.cache
+D:\DependencyGraph\Physics Components\obj\Debug\Physics Components.dll
+D:\DependencyGraph\Physics Components\obj\Debug\Physics Components.pdb

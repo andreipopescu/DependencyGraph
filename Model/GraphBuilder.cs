@@ -21,7 +21,7 @@ namespace Endava.DependencyGraph
 			//node1
 			float x1 = 300;
 			float y1 = 250;
-			float size1 = 120;
+			float size1 = 12;
 			var skill1 = new AttributeSkill("skill1", 10, group1);
 			var skill12 = new AttributeSkill("skill12", 5, group1);
 			var skill13 = new AttributeSkill("skill3", 8, group1);
@@ -32,7 +32,7 @@ namespace Endava.DependencyGraph
 			//node2
 			float x2 = 0;
 			float y2 = 0;
-			float size2 = 80;
+			float size2 = 8;
 			var skill2 = new AttributeSkill("skill1", 1, group2);
 			var skill22 = new AttributeSkill("skill12", 8, group1);
 			var skill23 = new AttributeSkill("skill33", 6, group2);
@@ -42,8 +42,8 @@ namespace Endava.DependencyGraph
 			//node3
 			float x3 = 0;
 			float y3 = 0;
-			float size3 = 60;
-			var skill3 = new AttributeSkill("skill3", 4, group2);
+			float size3 = 6;
+			var skill3 = new AttributeSkill("skill3", 14, group2);
 
 			var skill33 = new AttributeSkill("skill33", 15, group2);
 			var skill34 = new AttributeSkill("skill4", 4, group2);
@@ -53,7 +53,7 @@ namespace Endava.DependencyGraph
 			//node4
 			float x4 = 0;
 			float y4 = 0;
-			float size4 = 60;
+			float size4 = 6;
 			var skill4 = new AttributeSkill("skill4", 4, group2);
 
 			nodes.Add(new Node("node4", size4, x4, y4, new List<AttributeBase>() { skill4 }));
@@ -66,21 +66,26 @@ namespace Endava.DependencyGraph
 			float? attractionForce;
 			string description;
 
-			List<Node> nodes = CreateNodes();
-			List<Node> nodesToProcess = nodes.ToList();
+            List<Node> nodesToProcess = CreateNodes();
 			
+
+
 			while(nodesToProcess.Count > 0)
 			{
 				var startNode = nodesToProcess.First();
+
+                //BodyFactory.CreateNode(
+
 				nodesToProcess.Remove(startNode);
+
+                List<AttributeSkill> startNodeSkills = (from t in startNode.Attributes
+                                                        select t).OfType<AttributeSkill>().ToList();
 
 				for(int j = 0; j < nodesToProcess.Count; j++)
 				{
 					var endNode = nodesToProcess[j];
 
 					//get the skill attributes of each Node
-					List<AttributeSkill> startNodeSkills = (from t in startNode.Attributes
-															select t).OfType<AttributeSkill>().ToList();
 					List<AttributeSkill> endNodeSkills = (from t in endNode.Attributes
 														  select t).OfType<AttributeSkill>().ToList();
 					
@@ -108,8 +113,6 @@ namespace Endava.DependencyGraph
 						var nodeDistance = NodeHelper.GetDistanceBetweenNodes(startNode.Size, endNode.Size, attractionForce);
 
 
-						startNode.IsConnected = true;
-						endNode.IsConnected = true;
 					}
 				}
 			}
