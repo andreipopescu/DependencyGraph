@@ -20,3 +20,5 @@ C:\Users\apopescu\Desktop\DependencyGraph\DependencyGraph\obj\x86\Debug\Endava.D
 C:\Users\apopescu\Desktop\DependencyGraph\DependencyGraph\obj\x86\Debug\DependencyGraph.csproj.GenerateResource.Cache
 C:\Users\apopescu\Desktop\DependencyGraph\DependencyGraph\obj\x86\Debug\DependencyGraph.exe
 C:\Users\apopescu\Desktop\DependencyGraph\DependencyGraph\obj\x86\Debug\DependencyGraph.pdb
+C:\Users\apopescu\Documents\Visual Studio 2010\Projects\DependencyGraph\DependencyGraph\obj\x86\Debug\DependencyGraph.exe
+C:\Users\apopescu\Documents\Visual Studio 2010\Projects\DependencyGraph\DependencyGraph\obj\x86\Debug\DependencyGraph.pdb
