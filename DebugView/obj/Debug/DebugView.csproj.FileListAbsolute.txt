@@ -1,0 +1,7 @@
+C:\Users\apopescu\Desktop\DependencyGraph\DebugView\bin\Debug\DebugView.dll
+C:\Users\apopescu\Desktop\DependencyGraph\DebugView\bin\Debug\DebugView.pdb
+C:\Users\apopescu\Desktop\DependencyGraph\DebugView\bin\Debug\Farseer_Physics_Engine.dll
+C:\Users\apopescu\Desktop\DependencyGraph\DebugView\bin\Debug\Farseer_Physics_Engine.pdb
+C:\Users\apopescu\Desktop\DependencyGraph\DebugView\obj\Debug\DebugView.csprojResolveAssemblyReference.cache
+C:\Users\apopescu\Desktop\DependencyGraph\DebugView\obj\Debug\DebugView.dll
+C:\Users\apopescu\Desktop\DependencyGraph\DebugView\obj\Debug\DebugView.pdb

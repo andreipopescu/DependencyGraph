@@ -1,0 +1,7 @@
+C:\Users\apopescu\Desktop\DependencyGraph\Model\bin\Debug\Model.dll
+C:\Users\apopescu\Desktop\DependencyGraph\Model\bin\Debug\Model.pdb
+C:\Users\apopescu\Desktop\DependencyGraph\Model\bin\Debug\MvvmFoundation.Wpf.dll
+C:\Users\apopescu\Desktop\DependencyGraph\Model\bin\Debug\Thriple.dll
+C:\Users\apopescu\Desktop\DependencyGraph\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+C:\Users\apopescu\Desktop\DependencyGraph\Model\obj\Debug\Model.dll
+C:\Users\apopescu\Desktop\DependencyGraph\Model\obj\Debug\Model.pdb

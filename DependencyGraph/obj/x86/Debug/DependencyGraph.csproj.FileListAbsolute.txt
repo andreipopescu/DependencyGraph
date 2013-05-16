@@ -1,0 +1,22 @@
+C:\Users\apopescu\Desktop\DependencyGraph\DependencyGraph\bin\Debug\DependencyGraph.exe
+C:\Users\apopescu\Desktop\DependencyGraph\DependencyGraph\bin\Debug\DependencyGraph.pdb
+C:\Users\apopescu\Desktop\DependencyGraph\DependencyGraph\bin\Debug\Farseer_Physics_Engine.dll
+C:\Users\apopescu\Desktop\DependencyGraph\DependencyGraph\bin\Debug\Physics Components.dll
+C:\Users\apopescu\Desktop\DependencyGraph\DependencyGraph\bin\Debug\DebugView.dll
+C:\Users\apopescu\Desktop\DependencyGraph\DependencyGraph\bin\Debug\Farseer_Physics_Engine.pdb
+C:\Users\apopescu\Desktop\DependencyGraph\DependencyGraph\bin\Debug\Physics Components.pdb
+C:\Users\apopescu\Desktop\DependencyGraph\DependencyGraph\bin\Debug\DebugView.pdb
+C:\Users\apopescu\Desktop\DependencyGraph\DependencyGraph\obj\x86\Debug\DependencyGraph.csprojResolveAssemblyReference.cache
+C:\Users\apopescu\Desktop\DependencyGraph\DependencyGraph\obj\x86\Debug\DependencyGraphView.baml
+C:\Users\apopescu\Desktop\DependencyGraph\DependencyGraph\obj\x86\Debug\DependencyGraphView.g.cs
+C:\Users\apopescu\Desktop\DependencyGraph\DependencyGraph\obj\x86\Debug\MainWindow.g.cs
+C:\Users\apopescu\Desktop\DependencyGraph\DependencyGraph\obj\x86\Debug\App.g.cs
+C:\Users\apopescu\Desktop\DependencyGraph\DependencyGraph\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\apopescu\Desktop\DependencyGraph\DependencyGraph\obj\x86\Debug\DependencyGraph_MarkupCompile.cache
+C:\Users\apopescu\Desktop\DependencyGraph\DependencyGraph\obj\x86\Debug\DependencyGraph_MarkupCompile.lref
+C:\Users\apopescu\Desktop\DependencyGraph\DependencyGraph\obj\x86\Debug\MainWindow.baml
+C:\Users\apopescu\Desktop\DependencyGraph\DependencyGraph\obj\x86\Debug\DependencyGraph.g.resources
+C:\Users\apopescu\Desktop\DependencyGraph\DependencyGraph\obj\x86\Debug\Endava.DependencyGraph.Properties.Resources.resources
+C:\Users\apopescu\Desktop\DependencyGraph\DependencyGraph\obj\x86\Debug\DependencyGraph.csproj.GenerateResource.Cache
+C:\Users\apopescu\Desktop\DependencyGraph\DependencyGraph\obj\x86\Debug\DependencyGraph.exe
+C:\Users\apopescu\Desktop\DependencyGraph\DependencyGraph\obj\x86\Debug\DependencyGraph.pdb
