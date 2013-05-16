@@ -9,9 +9,9 @@ namespace Endava.DependencyGraph
 	{
 		private static Random random = new Random();
 
-		private static List<Node> CreateNodes()
+		public static List<Node> CreateNodes()
 		{
-			var nodes = new List<Node>();
+            List<Node> nodes = new List<Node>();
 			NodeDependency.ConnectedNodes = new List<NodeDependency.ConnectedNode>();
 
 			//groups

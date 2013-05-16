@@ -5,3 +5,10 @@ C:\Users\apopescu\Desktop\DependencyGraph\Model\bin\Debug\Thriple.dll
 C:\Users\apopescu\Desktop\DependencyGraph\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
 C:\Users\apopescu\Desktop\DependencyGraph\Model\obj\Debug\Model.dll
 C:\Users\apopescu\Desktop\DependencyGraph\Model\obj\Debug\Model.pdb
+D:\DependencyGraph\Model\bin\Debug\Model.dll
+D:\DependencyGraph\Model\bin\Debug\Model.pdb
+D:\DependencyGraph\Model\bin\Debug\MvvmFoundation.Wpf.dll
+D:\DependencyGraph\Model\bin\Debug\Thriple.dll
+D:\DependencyGraph\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+D:\DependencyGraph\Model\obj\Debug\Model.dll
+D:\DependencyGraph\Model\obj\Debug\Model.pdb

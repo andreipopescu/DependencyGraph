@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\apopescu\Documents\Visual Studio 2010\Projects\DependencyGraph\DependencyGraph\obj\x86\Debug\
+D:\DependencyGraph\DependencyGraph\obj\x86\Debug\
 Endava.DependencyGraph
 none
 false
 DEBUG;TRACE
-C:\Users\apopescu\Documents\Visual Studio 2010\Projects\DependencyGraph\DependencyGraph\App.xaml
+D:\DependencyGraph\DependencyGraph\App.xaml
 2-279259964
 
 9-431657568
-11-1133456320
+131931049340
 DependencyGraphView.xaml;MainWindow.xaml;
 
 True

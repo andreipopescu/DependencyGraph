@@ -20,5 +20,28 @@ C:\Users\apopescu\Desktop\DependencyGraph\DependencyGraph\obj\x86\Debug\Endava.D
 C:\Users\apopescu\Desktop\DependencyGraph\DependencyGraph\obj\x86\Debug\DependencyGraph.csproj.GenerateResource.Cache
 C:\Users\apopescu\Desktop\DependencyGraph\DependencyGraph\obj\x86\Debug\DependencyGraph.exe
 C:\Users\apopescu\Desktop\DependencyGraph\DependencyGraph\obj\x86\Debug\DependencyGraph.pdb
-C:\Users\apopescu\Documents\Visual Studio 2010\Projects\DependencyGraph\DependencyGraph\obj\x86\Debug\DependencyGraph.exe
-C:\Users\apopescu\Documents\Visual Studio 2010\Projects\DependencyGraph\DependencyGraph\obj\x86\Debug\DependencyGraph.pdb
+D:\DependencyGraph\DependencyGraph\obj\x86\Debug\DependencyGraph.exe
+D:\DependencyGraph\DependencyGraph\obj\x86\Debug\DependencyGraph.pdb
+D:\DependencyGraph\DependencyGraph\obj\x86\Debug\DependencyGraph.csprojResolveAssemblyReference.cache
+D:\DependencyGraph\DependencyGraph\obj\x86\Debug\DependencyGraphView.baml
+D:\DependencyGraph\DependencyGraph\obj\x86\Debug\DependencyGraphView.g.cs
+D:\DependencyGraph\DependencyGraph\obj\x86\Debug\MainWindow.g.cs
+D:\DependencyGraph\DependencyGraph\obj\x86\Debug\App.g.cs
+D:\DependencyGraph\DependencyGraph\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
+D:\DependencyGraph\DependencyGraph\obj\x86\Debug\DependencyGraph_MarkupCompile.cache
+D:\DependencyGraph\DependencyGraph\obj\x86\Debug\DependencyGraph_MarkupCompile.lref
+D:\DependencyGraph\DependencyGraph\bin\Debug\DependencyGraph.exe
+D:\DependencyGraph\DependencyGraph\bin\Debug\DependencyGraph.pdb
+D:\DependencyGraph\DependencyGraph\bin\Debug\Farseer_Physics_Engine.dll
+D:\DependencyGraph\DependencyGraph\bin\Debug\Model.dll
+D:\DependencyGraph\DependencyGraph\bin\Debug\Physics Components.dll
+D:\DependencyGraph\DependencyGraph\bin\Debug\MvvmFoundation.Wpf.dll
+D:\DependencyGraph\DependencyGraph\bin\Debug\DebugView.dll
+D:\DependencyGraph\DependencyGraph\bin\Debug\Farseer_Physics_Engine.pdb
+D:\DependencyGraph\DependencyGraph\bin\Debug\Model.pdb
+D:\DependencyGraph\DependencyGraph\bin\Debug\Physics Components.pdb
+D:\DependencyGraph\DependencyGraph\bin\Debug\DebugView.pdb
+D:\DependencyGraph\DependencyGraph\obj\x86\Debug\MainWindow.baml
+D:\DependencyGraph\DependencyGraph\obj\x86\Debug\DependencyGraph.g.resources
+D:\DependencyGraph\DependencyGraph\obj\x86\Debug\Endava.DependencyGraph.Properties.Resources.resources
+D:\DependencyGraph\DependencyGraph\obj\x86\Debug\DependencyGraph.csproj.GenerateResource.Cache

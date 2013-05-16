@@ -84,16 +84,24 @@ namespace Endava.DependencyGraph
             //joint2.Length = 9f;
             #endregion
 
-            List<KeyValuePair<Employ, bool>> employlist1 = GetEmploys();
-            //List<KeyValuePair<Employ, bool>> employlist2 = employlist1;
+            //List<KeyValuePair<Employ, bool>> employlist1 = GetEmploys();
+
+            List<Node> employlistVar = GraphBuilder.CreateNodes();
+            List<KeyValuePair<Node, bool>> employlist = new List<KeyValuePair<Node, bool>>();
+
+            foreach (var employ in employlistVar)
+            {
+                employlist.Add(new KeyValuePair<Node, bool>(employ, false));
+            }
 
             List<Body> bodys = new List<Body>();
             List<DistanceJoint> joints = new List<DistanceJoint>();
 
             // sets bodys
-            for (int i = 0; i < employlist1.Count; i++)
+            for (int i = 0; i < employlist.Count; i++)
             {
-                bodys.Add(BodyFactory.CreateNode(World, (employlist1[i].Key.Experience / 3), 25f, new Vector2(), employlist1[i].Key.Name));
+                //bodys.Add(BodyFactory.CreateNode(World, (employlist1[i].Key.Experience / 3), 25f, new Vector2(), employlist1[i].Key.Name));
+                bodys.Add(BodyFactory.CreateNode(World, (employlist[i].Key.Size / 3), 25f, new Vector2(), employlist[i].Key.Name));
                 bodys[i].BodyType = BodyType.Dynamic;
                 bodys[i].FixedRotation = true;
                 //bodys[i].UserData = "";
@@ -101,13 +109,13 @@ namespace Endava.DependencyGraph
 
             // sets joints
             int counter = 0;
-            for (int i = 0; i < employlist1.Count; i++)
+            for (int i = 0; i < employlist.Count; i++)
             {
-                for (int j = 0; j < employlist1.Count; j++)
+                for (int j = 0; j < employlist.Count; j++)
                 {
-                    if ((employlist1[j].Value != true) && (employlist1[i].Key != employlist1[j].Key))
+                    if ((employlist[j].Value != true) && (employlist[i].Key != employlist[j].Key))
                     {
-                        float lenght = CalculateNodeDistance(employlist1[i].Key, employlist1[j].Key);
+                        float lenght = CalculateNodeDistance(employlist[i].Key, employlist[j].Key);
 
                         if (lenght > 0)
                         {
@@ -125,13 +133,13 @@ namespace Endava.DependencyGraph
             base.LoadContent();
         }
 
-        public float CalculateNodeDistance(Employ pers1, Employ pers2)
+        public float CalculateNodeDistance(Node pers1, Node pers2)
         {
             const float correction = 1;
             float Pers1CommonSkillTotal = 0;
             float Pers2CommonSkillTotal = 0;
 
-            foreach (var skill in pers1.Skills)
+            foreach (var skill in pers1.Attributes)
             {
                 if (pers2.Skills.ContainsKey(skill.Key))
                 {

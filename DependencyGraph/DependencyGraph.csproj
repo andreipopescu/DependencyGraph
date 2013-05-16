@@ -36,6 +36,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MvvmFoundation.Wpf, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\MvvmFoundation.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
@@ -104,6 +108,10 @@
     <ProjectReference Include="..\Farseer Physics Engine\Farseer Physics Engine.csproj">
       <Project>{781B60FC-D431-42AD-A2F1-643A2067AED5}</Project>
       <Name>Farseer Physics Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{ab4ff70b-dca9-4d7f-867e-c92e9ed7cee6}</Project>
+      <Name>Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\Physics Components\Farseer Physics Modules.csproj">
       <Project>{0A3505F3-28CB-4CC0-ABD0-FE968BE7F2F4}</Project>
