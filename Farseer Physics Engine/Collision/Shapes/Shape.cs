@@ -102,7 +102,6 @@ namespace FarseerPhysics.Collision.Shapes
         Polygon = 2,
         Loop = 3,
         TypeCount = 4,
-		Node = 5,
     }
 
     /// <summary>
