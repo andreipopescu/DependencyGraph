@@ -180,32 +180,12 @@ namespace Endava.DependencyGraph
                     Color color = Colors.Transparent;
                     if (b.UserData != null)
                     {
-                        switch (b.UserData.ToString())
-                        {
-                            case "node3":
-                                color = Colors.Blue;
-                                break;
-                            case "SecondNode":
-                                color = Colors.GhostWhite;
-                                break;
-                            case "TherdNode":
-                                color = Colors.Gold;
-                                break;
-                            case "ForthNode":
-                                color = Colors.Orange;
-                                break;
-                            case "FifthNode":
-                                color = Colors.ForestGreen;
-                                break;
-                            default:
-                                color = Colors.Transparent;
-                                break;
-                        }
+                        color = Colors.Orange;
                     }
 
                     foreach (Fixture f in b.FixtureList)
                     {
-                        DrawShape(f, xf, DefaultShapeColor, color);
+                        DrawShape(f, xf, DefaultShapeColor, color, b.UserData);
                         //if (b.Enabled == false)
                         //{
                         //    DrawShape(f, xf, InactiveShapeColor);
@@ -412,7 +392,7 @@ namespace Endava.DependencyGraph
             }
         }
 
-        private void DrawShape(Fixture fixture, Transform xf, Color color, Color fillcolor)
+        private void DrawShape(Fixture fixture, Transform xf, Color color, Color fillcolor, object Userdata)
         {
             switch (fixture.ShapeType)
             {
@@ -575,17 +555,23 @@ namespace Endava.DependencyGraph
             }
         }
 
+        static float radius = 0;
         private TextBlock NodeText(string description, Body body)
         {
             if (!string.IsNullOrEmpty(description) && description != "Static")
             {
+                if (radius <= 0)
+                {
+                    radius = (float)body.UserData;
+                }
+
                 TextBlock text = new TextBlock();
                 text.Text = description;
-                text.Width = 50;
+                text.Width = radius * 2;
                 //text.Height = 20;
                 text.TextWrapping = TextWrapping.Wrap;
                 text.TextAlignment = TextAlignment.Center;
-                //text.RenderTransform = new ScaleTransform(1, 1);
+                text.RenderTransform = new ScaleTransform(1, 1);
 
                 Point position = Transform.Transform(new Point(body.Position.X, body.Position.Y));
 

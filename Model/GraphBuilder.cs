@@ -27,7 +27,7 @@ namespace Endava.DependencyGraph
 			var skill13 = new AttributeSkill("skill3", 8, group1);
 			var skill14 = new AttributeSkill("skill4", 3, group2);
 
-			nodes.Add(new Node("node1", size1, x1, y1, new List<AttributeBase>() { skill1, skill12, skill13, skill14 }));
+			nodes.Add(new Node("This is first node", size1, x1, y1, new List<AttributeBase>() { skill1, skill12, skill13, skill14 }));
 
 			//node2
 			float x2 = 0;
