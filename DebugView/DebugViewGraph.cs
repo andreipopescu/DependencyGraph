@@ -497,63 +497,7 @@ namespace Endava.DependencyGraph
             }
         }
 
-        private Image SetPieChart()
-        {
-            int width = 50, height = 50;
-            decimal[] vals = new decimal[] { 11, 19, 25, 5, 40 };
-
-            System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(width, height);
-            System.Drawing.Graphics graphics = System.Drawing.Graphics.FromImage(bitmap);
-            System.Drawing.SolidBrush brush = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
-
-            graphics.FillRectangle(brush, 0, 0, width, height);
-            brush.Dispose();
-
-            System.Drawing.SolidBrush[] brushes = new System.Drawing.SolidBrush[10];
-            brushes[0] = new System.Drawing.SolidBrush(System.Drawing.Color.Yellow);
-            brushes[1] = new System.Drawing.SolidBrush(System.Drawing.Color.Green);
-            brushes[2] = new System.Drawing.SolidBrush(System.Drawing.Color.Blue);
-            brushes[3] = new System.Drawing.SolidBrush(System.Drawing.Color.Cyan);
-            brushes[4] = new System.Drawing.SolidBrush(System.Drawing.Color.Magenta);
-
-            // Sum the inputs to get totals
-            decimal total = 0;
-            foreach (decimal val in vals)
-            {
-                total += val;
-            }
-
-            //Draw the pie chart
-            float start = 0f;
-            float end = 0f;
-            decimal current = 0;
-            for (int i = 0; i < vals.Length; i++)
-            {
-                current += vals[i];
-                start = end;
-                end = (float)(current / total) * 360.0f;
-                graphics.FillPie(brushes[(i % 5) / 2], 0f, 0f, width, height, start, end - start);
-            }
-
-            // Clean Brushes
-            //foreach (var item in brushes)
-            //{
-            //    item.Dispose();
-            //}
-
-            using (var memstream = new System.IO.MemoryStream())
-            {
-                bitmap.Save(memstream, System.Drawing.Imaging.ImageFormat.Png);
-                memstream.Position = 0;
-                System.Windows.Media.Imaging.BitmapImage bi = new System.Windows.Media.Imaging.BitmapImage();
-                bi.BeginInit();
-                bi.StreamSource = memstream;
-                bi.EndInit();
-                Image img = new Image();
-                img.Source = bi;
-                return img;
-            }
-        }
+        
 
         static float radius = 0;
         private TextBlock NodeText(string description, Body body)
@@ -567,15 +511,14 @@ namespace Endava.DependencyGraph
 
                 TextBlock text = new TextBlock();
                 text.Text = description;
-                text.Width = radius * 2;
-                //text.Height = 20;
-                text.TextWrapping = TextWrapping.Wrap;
-                text.TextAlignment = TextAlignment.Center;
-                text.RenderTransform = new ScaleTransform(1, 1);
+                text.Width = radius * 4;
+                text.TextWrapping = TextWrapping.WrapWithOverflow;
+                text.TextAlignment = TextAlignment.Left;
+                text.RenderTransform = new ScaleTransform(1.1, 1.1);
 
                 Point position = Transform.Transform(new Point(body.Position.X, body.Position.Y));
 
-                Canvas.SetLeft(text, position.X - 20);
+                Canvas.SetLeft(text, position.X - (radius * 2));
                 Canvas.SetTop(text, position.Y - 9);
 
                 return text;
@@ -586,8 +529,7 @@ namespace Endava.DependencyGraph
 
         public override void DrawPolygon(Vector2[] vertices, int count, float red, float green, float blue)
         {
-            DrawPolygon(vertices, count,
-                        Color.FromArgb(255, (byte)(red * 255), (byte)(green * 255), (byte)(blue * 255)));
+            DrawPolygon(vertices, count, Color.FromArgb(255, (byte)(red * 255), (byte)(green * 255), (byte)(blue * 255)));
         }
 
         public void DrawPolygon(Vector2[] vertices, int count, Color color)
