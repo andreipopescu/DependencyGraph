@@ -422,9 +422,27 @@ namespace Endava.DependencyGraph
 
                         //Color fillcolor = (Color)ColorConverter.ConvertFromString("#80FFFFFF"); //#80FFFFFF
 
-                        DrawCustomPolygon(vertices, vertexCount, fillcolor, color, fixture.UserData.ToString(), fixture.Body);
+						if (fixture.UserData == null) fixture.UserData = "";
 
-                        #region ...
+	                    var bodyDescription = fixture.Body.UserData as BodyDescription;
+	                    if (bodyDescription == null)
+	                    {
+		                    DrawSolidPolygon(vertices, vertexCount, color);
+	                    }
+	                    else
+	                    {
+		                    switch (bodyDescription.FigureType)
+		                    {
+			                    case FigureType.Node:
+									DrawNode(vertices, vertexCount, fillcolor, color, bodyDescription, fixture.Body);
+				                    break;
+			                    case FigureType.Tooltip:
+									DrawTooltip(vertices, vertexCount, color, true, bodyDescription.Text, fixture.Body);
+				                    break;
+		                    }
+	                    }
+
+	                    #region ...
                         //DrawSolidPolygon(vertices, vertexCount, color);
 
                         //string description = fixture.UserData.ToString();
@@ -475,7 +493,59 @@ namespace Endava.DependencyGraph
             }
         }
 
-        public void DrawCustomPolygon(Vector2[] vertices, int count, Color fillColor, Color strokeColor, string description, Body body)
+		public void DrawTooltip(Vector2[] vertices, int count, Color color, bool outline, string description, Body body)
+		{
+			if (count == 2)
+			{
+				DrawPolygon(vertices, count, color);
+				return;
+			}
+
+			Color colorFill = Color.FromArgb((byte)(outline ? 128 : 255), color.R, color.G, color.B);
+
+			Polygon poly = new Polygon();
+			poly.Fill = new SolidColorBrush(colorFill);
+
+			for (int i = 0; i < count; i++)
+			{
+				poly.Points.Add(Transform.Transform(new Point(vertices[i].X, vertices[i].Y)));
+			}
+			_debugCanvas.Children.Add(poly);
+
+			if (outline)
+			{
+				DrawPolygon(vertices, count, color);
+			}
+
+			TextBlock text = SetTooltipText(description, body);
+			if (text != null)
+			{
+				_debugCanvas.Children.Add(text);
+			}
+		}
+
+		private TextBlock SetTooltipText(string description, Body body)
+		{
+			if (!string.IsNullOrEmpty(description) && description != "Static")
+			{
+				TextBlock text = new TextBlock();
+				text.Text = description;
+				text.Width = 90;
+				text.TextWrapping = TextWrapping.WrapWithOverflow;
+				text.TextAlignment = TextAlignment.Left;
+				//text.Background = new SolidColorBrush(Colors.AliceBlue);
+
+				Point position = Transform.Transform(new Point(body.Position.X, body.Position.Y));
+				Canvas.SetLeft(text, position.X - 45);
+				Canvas.SetTop(text, position.Y - 45);
+
+				return text;
+			}
+			else
+				return null;
+		}
+
+        public void DrawNode(Vector2[] vertices, int count, Color fillColor, Color strokeColor, BodyDescription bodyDescription, Body body)
         {
             Polygon poly = new Polygon();
             poly.Fill = new SolidColorBrush(fillColor);
@@ -490,44 +560,38 @@ namespace Endava.DependencyGraph
 
             //_debugCanvas.Children.Add(SetPieChart());
 
-            TextBlock text = NodeText(description, body);
+			TextBlock text = SetNodeText(bodyDescription, body);
             if (text != null)
             {
                 _debugCanvas.Children.Add(text);
             }
         }
 
-        
-
-        static float radius = 0;
-        private TextBlock NodeText(string description, Body body)
-        {
-            if (!string.IsNullOrEmpty(description) && description != "Static")
+		private TextBlock SetNodeText(BodyDescription bodyDescription, Body body)
+		{
+			if (!string.IsNullOrEmpty(bodyDescription.Text) && bodyDescription.Text != "Static")
             {
-                if (radius <= 0)
-                {
-                    radius = (float)body.UserData;
-                }
+				var radius = bodyDescription.Radius;
 
                 TextBlock text = new TextBlock();
-                text.Text = description;
-                text.Width = radius * 4;
+				text.Text = bodyDescription.Text;
+                text.Width = radius * 13;
+				text.FontSize = text.Width / 6;
                 text.TextWrapping = TextWrapping.WrapWithOverflow;
-                text.TextAlignment = TextAlignment.Left;
-                text.RenderTransform = new ScaleTransform(1.1, 1.1);
+                text.TextAlignment = TextAlignment.Center;
+				//text.Background = new SolidColorBrush(Colors.AliceBlue);
 
                 Point position = Transform.Transform(new Point(body.Position.X, body.Position.Y));
-
-                Canvas.SetLeft(text, position.X - (radius * 2));
-                Canvas.SetTop(text, position.Y - 9);
+                Canvas.SetLeft(text, position.X - (radius * 6.5));
+				Canvas.SetTop(text, position.Y - (radius * 3));
 
                 return text;
             }
-            else
-                return null;
-        }
 
-        public override void DrawPolygon(Vector2[] vertices, int count, float red, float green, float blue)
+			return null;
+		}
+
+	    public override void DrawPolygon(Vector2[] vertices, int count, float red, float green, float blue)
         {
             DrawPolygon(vertices, count, Color.FromArgb(255, (byte)(red * 255), (byte)(green * 255), (byte)(blue * 255)));
         }

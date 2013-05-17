@@ -79,9 +79,9 @@ namespace FarseerPhysics.Collision.Shapes
             : base(0)
         {
             ShapeType = ShapeType.Polygon;
-            _radius = Settings.PolygonRadius;
+			_radius = Settings.PolygonRadius;
             Normals = new Vertices();
-            Vertices = new Vertices();
+            Vertices = new Vertices();			
         }
 
         public override int ChildCount

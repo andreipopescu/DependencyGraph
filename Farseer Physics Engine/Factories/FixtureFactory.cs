@@ -15,15 +15,15 @@ namespace FarseerPhysics.Factories
     /// </summary>
     public static class FixtureFactory
     {
-		public static void AttachNode(float radius, int edges, float density, Body body, string description)
+		public static void AttachNode(float radius, int edges, Body body, object bodyDescription)
 		{
 			if (radius <= 0)
 				throw new ArgumentOutOfRangeException("radius", "radius must be more than 0");
 
 			Vertices ellipseVertices = PolygonTools.CreateEllipse(radius, radius, edges);
-			PolygonShape polygonShape = new PolygonShape(ellipseVertices, density, radius, description);
-
-			body.CreateFixture(polygonShape, description);
+			PolygonShape polygonShape = new PolygonShape(ellipseVertices, 1);
+			
+			body.CreateFixture(polygonShape, bodyDescription);
 		}
 
         public static Fixture AttachEdge(Vector2 start, Vector2 end, Body body)

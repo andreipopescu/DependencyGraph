@@ -6,16 +6,42 @@ using FarseerPhysics.Common;
 using FarseerPhysics.Common.Decomposition;
 using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
+using Endava.DependencyGraph;
 
 namespace FarseerPhysics.Factories
 {
     public static class BodyFactory
     {
-		public static Body CreateNode(World world, float radius, float density, Vector2 position, string description)
+		public static Body CreateNode(World world, float radius, Vector2 position, BodyDescription bodyDescription)
 		{
 			int edges = 50;
 			Body body = CreateBody(world, position);
-			FixtureFactory.AttachNode(radius, edges, density, body, description);
+			body.BodyType = BodyType.Dynamic;
+			body.FixedRotation = true;
+			body.UserData = bodyDescription;
+			FixtureFactory.AttachNode(radius, edges, body, bodyDescription);
+
+			return body;
+		}
+
+		public static Body CreateTooltip(World world, float width, float height, Vector2 position, string description)
+		{
+			if (width <= 0)
+				throw new ArgumentOutOfRangeException("width", "Width must be more than 0 meters");
+
+			if (height <= 0)
+				throw new ArgumentOutOfRangeException("height", "Height must be more than 0 meters");
+
+			Vertices rectangleVertices = PolygonTools.CreateRectangle(width / 2, height / 2);
+			PolygonShape rectangleShape = new PolygonShape(rectangleVertices, 1);
+
+			BodyDescription bodyDescription = new BodyDescription(description, height, FigureType.Tooltip);
+
+			Body body = CreateBody(world, position);
+			body.CreateFixture(rectangleShape, bodyDescription);
+			body.CollidesWith = Category.None;
+			body.UserData = bodyDescription;
+
 			return body;
 		}
 

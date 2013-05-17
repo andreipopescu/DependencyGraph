@@ -3,8 +3,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using FarseerPhysics.Collision;
+using FarseerPhysics.Collision.Shapes;
 using FarseerPhysics.Dynamics;
 using FarseerPhysics.Dynamics.Joints;
+using FarseerPhysics.Factories;
 using Microsoft.Xna.Framework;
 using Border = Endava.DependencyGraph.Components.Border;
 
@@ -33,6 +35,7 @@ namespace Endava.DependencyGraph.ScreenSystem
 		private FixedMouseJoint _fixedMouseJoint;
 		private bool _otherScreenHasFocus;
 		public bool firstRun = true;
+		private bool tooltip = false;
 
 		protected GameScreen()
 		{
@@ -288,6 +291,59 @@ namespace Endava.DependencyGraph.ScreenSystem
 			}
 		}
 
+		private bool IsMouseOnConnector(Vector2 p, Joint joint)
+		{
+			//convert pixels to Vector2 measures
+			var thickness = joint.Thickness / 7;
+
+			var startPoint = joint.WorldAnchorA;
+			var endPoint = joint.WorldAnchorB;
+
+			Vector2 leftPoint;
+			Vector2 rightPoint;
+
+			// Normalize start/end to left right to make the offset calc simpler.
+			if (startPoint.X <= endPoint.X)
+			{
+				leftPoint = startPoint;
+				rightPoint = endPoint;
+			}
+			else
+			{
+				leftPoint = endPoint;
+				rightPoint = startPoint;
+			}
+
+			// If point is out of bounds, no need to do further checks.                  
+			if (p.X + thickness < leftPoint.X || rightPoint.X < p.X - thickness)
+			{
+				return false;
+			}
+
+			if (p.Y + thickness < Math.Min(leftPoint.Y, rightPoint.Y) || Math.Max(leftPoint.Y, rightPoint.Y) < p.Y - thickness)
+			{
+				return false;
+			}
+
+			double deltaX = rightPoint.X - leftPoint.X;
+			double deltaY = rightPoint.Y - leftPoint.Y;
+
+			// If the line is straight, the earlier boundary check is enough to determine that the point is on the line.
+			// Also prevents division by zero exceptions.
+			if (deltaX == 0 || deltaY == 0)
+			{
+				return true;
+			}
+			double slope = deltaY / deltaX;
+			double offset = leftPoint.Y - leftPoint.X * slope;
+			double calculatedY = p.X * slope + offset;
+
+			// Check calculated Y matches the points Y coord with some easing.
+			bool lineContains = p.Y - thickness <= calculatedY && calculatedY <= p.Y + thickness;
+
+			return lineContains;
+		}
+
 		private void MouseDown(Vector2 p)
 		{
 			if (_fixedMouseJoint != null)
@@ -304,6 +360,19 @@ namespace Endava.DependencyGraph.ScreenSystem
 			aabb.UpperBound = p + d;
 
 			Fixture savedFixture = null;
+
+			if (tooltip)
+			{
+				foreach (var body in World.BodyList)
+				{
+					var bodyDescription = body.UserData as BodyDescription;
+					if (bodyDescription != null && bodyDescription.FigureType == FigureType.Tooltip)
+					{
+						World.BodyList.Remove(body);
+						break;
+					}
+				}
+			}
 
 			// Query the world for overlapping shapes.
 			World.QueryAABB(
@@ -333,6 +402,19 @@ namespace Endava.DependencyGraph.ScreenSystem
 				_fixedMouseJoint.MaxForce = 1000.0f * body.Mass;
 				World.AddJoint(_fixedMouseJoint);
 				body.Awake = true;
+			}
+			// Check for connectors if no fixture is found
+			else
+			{
+				foreach (var joint in World.JointList)
+				{
+					if (IsMouseOnConnector(p, joint))
+					{
+						BodyFactory.CreateTooltip(World, 5, 5, p, joint.UserData.ToString());
+						tooltip = true;
+						return;
+					}
+				}
 			}
 		}
 

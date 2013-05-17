@@ -44,38 +44,37 @@ namespace Endava.DependencyGraph
             base.LoadContent();
         }
 
-        private void SetBodiesAndJoints(List<Node> employlist, List<Body> bodys, List<DistanceJoint> joints)
+        private void SetBodiesAndJoints(List<Node> nodes, List<Body> bodies, List<DistanceJoint> joints)
         {
-            // sets bodys
-            for (int i = 0; i < employlist.Count; i++)
+            // sets bodies
+            for (int i = 0; i < nodes.Count; i++)
             {
-                bodys.Add(BodyFactory.CreateNode(World, (employlist[i].Size / 3), 25f, new Vector2(), employlist[i].Name));
-                bodys[i].BodyType = BodyType.Dynamic;
-                bodys[i].FixedRotation = true;
-                bodys[i].UserData = employlist[i].Size;
+				BodyDescription bodyDescription = new BodyDescription(nodes[i].Name, nodes[i].Size, FigureType.Node);
+				bodies.Add(BodyFactory.CreateNode(World, (nodes[i].Size / 3), new Vector2(), bodyDescription));
             }
 
             // sets joints
             int counter = 0;
-            for (int i = 0; i < employlist.Count; i++)
+            for (int i = 0; i < nodes.Count; i++)
             {
-                for (int j = 0; j < employlist.Count; j++)
+                for (int j = 0; j < nodes.Count; j++)
                 {
-                    if ((employlist[j].IsConnected != true) && (employlist[i].Name != employlist[j].Name))
+                    if ((nodes[j].IsConnected != true) && (nodes[i].Name != nodes[j].Name))
                     {
-                        float lenght = CalculateNodeDistance(employlist[i], employlist[j]);
+                        float length = CalculateNodeDistance(nodes[i], nodes[j]);
 
-                        if (lenght > 0)
+                        if (length > 0)
                         {
-                            joints.Add(JointFactory.CreateConnector(World, bodys[i], bodys[j], 3f));
+                            joints.Add(JointFactory.CreateConnector(World, bodies[i], bodies[j], 3f));
                             joints[counter].CollideConnected = true;
-                            joints[counter].Length = lenght;
+                            joints[counter].Length = length;
+	                        joints[counter].UserData = "Common skills: ";
                             counter++;
                         }
                     }
                 }
 
-                employlist[i].IsConnected = true;
+                nodes[i].IsConnected = true;
             }
         }
 
