@@ -62,8 +62,6 @@ namespace Endava.DependencyGraph
 
             List<Node> nodesToProcess = CreateNodes();
 			
-
-
 			while(nodesToProcess.Count > 0)
 			{
 				var startNode = nodesToProcess.First();
@@ -112,6 +110,7 @@ namespace Endava.DependencyGraph
 			}
 		}
 
+		/*
 		/// <summary>
 		/// Position the endNode and the startNode maintaining the distance to the base (connected) Node
 		/// Applied generalized Pythagoras' theorem
@@ -203,6 +202,6 @@ namespace Endava.DependencyGraph
 					break;
 			}
 		}
-
+		*/
 	}
 }
