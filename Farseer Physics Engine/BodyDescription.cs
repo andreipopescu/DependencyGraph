@@ -14,14 +14,14 @@ namespace Endava.DependencyGraph
 
 	public class BodyDescription
 	{
-		public BodyDescription(string text, float radius, FigureType figure)
+		public BodyDescription(string text, object size, FigureType figure)
 		{
 			Text = text;
-			Radius = radius;
+			Size = size;
 			FigureType = figure;
 		}
 		public string Text { get; set; }
-		public float Radius { get; set; }
+		public object Size { get; set; }
 		public FigureType FigureType { get; set; }
 	}
 }

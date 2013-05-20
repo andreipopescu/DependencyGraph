@@ -13,7 +13,7 @@
 				<RectangleGeometry Rect="0,0,1000,1000"></RectangleGeometry>
 			</Canvas.Clip>
 		</Canvas>
-		<TextBlock Canvas.Left="24" Canvas.Top="24" Height="23" Name="txtFPS" Text="FPS" Foreground="White" />
+		<TextBlock Canvas.Left="45" Canvas.Top="24" Height="23" Name="txtFPS" Text="FPS" Foreground="White" />
 		<TextBlock Canvas.Left="24" Canvas.Top="44" Name="txtDebug" Text="" Foreground="Black" />
 	</Canvas>
 	

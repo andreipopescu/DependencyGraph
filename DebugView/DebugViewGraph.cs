@@ -322,74 +322,16 @@ namespace Endava.DependencyGraph
                 x2 = xf2.Position;
             }
             Vector2 p2 = joint.WorldAnchorB;
-
             Vector2 x1 = xf1.Position;
-
             Vector2 p1 = joint.WorldAnchorA;
-
             Color color = Color.FromArgb(255, 128, 205, 205);
 
-
-            switch (joint.JointType)
-            {
-                case JointType.Connector:
-                    {
-                        float thickness = joint.Thickness;
-                        DrawSegment(p1, p2, color, thickness);
-                    }
-                    break;
-
-                case JointType.Distance:
-                    DrawSegment(p1, p2, color);
-                    break;
-
-                case JointType.Pulley:
-                    {
-                        PulleyJoint pulley = (PulleyJoint)joint;
-                        Vector2 s1 = pulley.GroundAnchorA;
-                        Vector2 s2 = pulley.GroundAnchorB;
-                        DrawSegment(s1, p1, color);
-                        DrawSegment(s2, p2, color);
-                        DrawSegment(s1, s2, color);
-                    }
-                    break;
-
-                case JointType.FixedMouse:
-                    DrawPoint(p1, 0.5f, Color.FromArgb(255, 0, 255, 0));
-                    DrawSegment(p1, p2, Color.FromArgb(255, 205, 205, 205));
-                    break;
-                case JointType.Revolute:
-                    //DrawSegment(x2, p1, color);
-                    DrawSegment(p2, p1, color);
-                    DrawSolidCircle(p2, 0.1f, new Vector2(), Colors.Red);
-                    DrawSolidCircle(p1, 0.1f, new Vector2(), Colors.Blue);
-                    break;
-                case JointType.FixedRevolute:
-                    DrawSolidCircle(p1, 0.1f, new Vector2(), Colors.Purple);
-                    break;
-                case JointType.FixedLine:
-                    DrawSegment(x1, p1, color);
-                    DrawSegment(p1, p2, color);
-                    break;
-                case JointType.FixedDistance:
-                    DrawSegment(x1, p1, color);
-                    DrawSegment(p1, p2, color);
-                    break;
-                case JointType.FixedPrismatic:
-                    DrawSegment(x1, p1, color);
-                    DrawSegment(p1, p2, color);
-                    break;
-                case JointType.Gear:
-                    DrawSegment(x1, x2, color);
-                    //DrawSegment(x1, p1, color);
-                    //DrawSegment(p1, p2, color);
-                    break;
-                default:
-                    DrawSegment(x1, p1, color);
-                    DrawSegment(p1, p2, color);
-                    DrawSegment(x2, p2, color);
-                    break;
-            }
+		    if (joint.JointType != JointType.FixedMouse)
+		    {
+			    DrawSegment(x1, p1, color);
+			    DrawSegment(p1, p2, color);
+			    DrawSegment(x2, p2, color);
+		    }
         }
 
         private void DrawShape(Fixture fixture, Transform xf, Color color, Color fillcolor, object Userdata)
@@ -437,7 +379,7 @@ namespace Endava.DependencyGraph
 									DrawNode(vertices, vertexCount, fillcolor, color, bodyDescription, fixture.Body);
 				                    break;
 			                    case FigureType.Tooltip:
-									DrawTooltip(vertices, vertexCount, color, true, bodyDescription.Text, fixture.Body);
+									DrawTooltip(vertices, vertexCount, color, true, bodyDescription, fixture.Body);
 				                    break;
 		                    }
 	                    }
@@ -493,7 +435,7 @@ namespace Endava.DependencyGraph
             }
         }
 
-		public void DrawTooltip(Vector2[] vertices, int count, Color color, bool outline, string description, Body body)
+		public void DrawTooltip(Vector2[] vertices, int count, Color color, bool outline, BodyDescription description, Body body)
 		{
 			if (count == 2)
 			{
@@ -524,21 +466,23 @@ namespace Endava.DependencyGraph
 			}
 		}
 
-		private TextBlock SetTooltipText(string description, Body body)
+		private TextBlock SetTooltipText(BodyDescription description, Body body)
 		{
-			if (!string.IsNullOrEmpty(description) && description != "Static")
+			if (!string.IsNullOrEmpty(description.Text) && description.Text != "Static")
 			{
 				TextBlock text = new TextBlock();
-				text.Text = description;
-				text.Width = 90;
+				text.Text = description.Text;
+				var textSize = (Size) description.Size;
+				text.Width = textSize.Width * 8;
+				text.FontWeight = FontWeights.SemiBold;
+
 				text.TextWrapping = TextWrapping.WrapWithOverflow;
 				text.TextAlignment = TextAlignment.Left;
 				//text.Background = new SolidColorBrush(Colors.AliceBlue);
 
 				Point position = Transform.Transform(new Point(body.Position.X, body.Position.Y));
-				Canvas.SetLeft(text, position.X - 45);
-				Canvas.SetTop(text, position.Y - 45);
-
+				Canvas.SetLeft(text, position.X - textSize.Width * 3.7);
+				Canvas.SetTop(text, position.Y - textSize.Height * 8);
 				return text;
 			}
 			else
@@ -571,10 +515,10 @@ namespace Endava.DependencyGraph
 		{
 			if (!string.IsNullOrEmpty(bodyDescription.Text) && bodyDescription.Text != "Static")
             {
-				var radius = bodyDescription.Radius;
+				var radius = (float)bodyDescription.Size;
 
                 TextBlock text = new TextBlock();
-				text.Text = bodyDescription.Text;
+				text.Text = bodyDescription.Text.Replace(' ', '\n');
                 text.Width = radius * 13;
 				text.FontSize = text.Width / 6;
                 text.TextWrapping = TextWrapping.WrapWithOverflow;
@@ -718,6 +662,7 @@ namespace Endava.DependencyGraph
         {
             Line line = new Line();
             line.Stroke = new SolidColorBrush(color);
+	        line.StrokeThickness = 3;
 
             Point start2 = Transform.Transform(new Point(start.X, start.Y));
             Point end2 = Transform.Transform(new Point(end.X, end.Y));

@@ -253,7 +253,7 @@ namespace Endava.DependencyGraph.ScreenSystem
 			//Mouse
 			Point p = Transform.Inverse.Transform(new Point(input.CurrentMouseState.X, input.CurrentMouseState.Y));
 			Vector2 position = new Vector2((float)p.X, (float)p.Y);
-
+			
 			if (input.CurrentMouseState.IsLeftButtonDown == false && input.LastMouseState.IsLeftButtonDown)
 			{
 				MouseUp();
@@ -294,10 +294,12 @@ namespace Endava.DependencyGraph.ScreenSystem
 		private bool IsMouseOnConnector(Vector2 p, Joint joint)
 		{
 			//convert pixels to Vector2 measures
-			var thickness = joint.Thickness / 7;
+			var tolerance = joint.Thickness / 2.5;
 
 			var startPoint = joint.WorldAnchorA;
 			var endPoint = joint.WorldAnchorB;
+
+			Math.Abs(joint.WorldAnchorA.X);
 
 			Vector2 leftPoint;
 			Vector2 rightPoint;
@@ -315,12 +317,12 @@ namespace Endava.DependencyGraph.ScreenSystem
 			}
 
 			// If point is out of bounds, no need to do further checks.                  
-			if (p.X + thickness < leftPoint.X || rightPoint.X < p.X - thickness)
+			if (p.X + tolerance < leftPoint.X || rightPoint.X < p.X - tolerance)
 			{
 				return false;
 			}
 
-			if (p.Y + thickness < Math.Min(leftPoint.Y, rightPoint.Y) || Math.Max(leftPoint.Y, rightPoint.Y) < p.Y - thickness)
+			if (p.Y + tolerance < Math.Min(leftPoint.Y, rightPoint.Y) || Math.Max(leftPoint.Y, rightPoint.Y) < p.Y - tolerance)
 			{
 				return false;
 			}
@@ -330,7 +332,7 @@ namespace Endava.DependencyGraph.ScreenSystem
 
 			// If the line is straight, the earlier boundary check is enough to determine that the point is on the line.
 			// Also prevents division by zero exceptions.
-			if (deltaX == 0 || deltaY == 0)
+			if ((Math.Abs(deltaX) <= tolerance / 7) || (Math.Abs(deltaY) <= tolerance / 12))
 			{
 				return true;
 			}
@@ -339,7 +341,7 @@ namespace Endava.DependencyGraph.ScreenSystem
 			double calculatedY = p.X * slope + offset;
 
 			// Check calculated Y matches the points Y coord with some easing.
-			bool lineContains = p.Y - thickness <= calculatedY && calculatedY <= p.Y + thickness;
+			bool lineContains = p.Y - tolerance <= calculatedY && calculatedY <= p.Y + tolerance;
 
 			return lineContains;
 		}
@@ -410,7 +412,7 @@ namespace Endava.DependencyGraph.ScreenSystem
 				{
 					if (IsMouseOnConnector(p, joint))
 					{
-						BodyFactory.CreateTooltip(World, 5, 5, p, joint.UserData.ToString());
+						BodyFactory.CreateTooltip(World, p, joint.UserData.ToString());
 						tooltip = true;
 						return;
 					}

@@ -6,13 +6,23 @@ using MvvmFoundation.Wpf;
 
 namespace Endava.DependencyGraph
 {
-	public class AttributeBase//: ObservableObject
+	public class AttributeBase
 	{
 		public string Name {get; set; }
 
 		public AttributeBase(string name)
 		{
 			Name = name;
+		}
+	}
+
+	public class AttributeSize : AttributeBase
+	{
+		public float Size { get; set; }
+
+		public AttributeSize(float size): base("Size")
+		{
+			Size = size;
 		}
 	}
 

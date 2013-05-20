@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
 using Endava.DependencyGraph;
 using FarseerPhysics.Collision.Shapes;
 using FarseerPhysics.Common;
 using FarseerPhysics.Common.Decomposition;
 using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
-using Endava.DependencyGraph;
 
 namespace FarseerPhysics.Factories
 {
@@ -19,23 +20,24 @@ namespace FarseerPhysics.Factories
 			body.BodyType = BodyType.Dynamic;
 			body.FixedRotation = true;
 			body.UserData = bodyDescription;
+			body.LinearDamping = 3f;
 			FixtureFactory.AttachNode(radius, edges, body, bodyDescription);
 
 			return body;
 		}
 
-		public static Body CreateTooltip(World world, float width, float height, Vector2 position, string description)
+		public static Body CreateTooltip(World world, Vector2 position, string description)
 		{
-			if (width <= 0)
-				throw new ArgumentOutOfRangeException("width", "Width must be more than 0 meters");
+			var skills = description.Split('\n');
+			float width = skills.Max(s => s.Length);
+			if (width < 4) width++;
 
-			if (height <= 0)
-				throw new ArgumentOutOfRangeException("height", "Height must be more than 0 meters");
+			var height = (float) skills.Count();
 
-			Vertices rectangleVertices = PolygonTools.CreateRectangle(width / 2, height / 2);
+			Vertices rectangleVertices = PolygonTools.CreateRectangle(width / 5, height / 2.5f);
 			PolygonShape rectangleShape = new PolygonShape(rectangleVertices, 1);
 
-			BodyDescription bodyDescription = new BodyDescription(description, height, FigureType.Tooltip);
+			BodyDescription bodyDescription = new BodyDescription(description, new Size(width, height), FigureType.Tooltip);
 
 			Body body = CreateBody(world, position);
 			body.CreateFixture(rectangleShape, bodyDescription);

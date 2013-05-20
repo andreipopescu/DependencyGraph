@@ -19,44 +19,38 @@ namespace Endava.DependencyGraph
 			Group group2 = new Group("Group2");
 
 			//node1
-			float x1 = 300;
-			float y1 = 250;
-			float size1 = 12;
-			var skill1 = new AttributeSkill("skill1", 10, group1);
-			var skill12 = new AttributeSkill("skill12", 5, group1);
-			var skill13 = new AttributeSkill("skill3", 8, group1);
-			var skill14 = new AttributeSkill("skill4", 3, group2);
+			var size1 = new AttributeSize(12);
+			var skill1 = new AttributeSkill("ASP.NET", 10, group1);
+			var skill12 = new AttributeSkill("Oracle", 5, group1);
+			var skill13 = new AttributeSkill("WCF", 8, group1);
+			var skill14 = new AttributeSkill("LINQ", 3, group2);
+			var skill15 = new AttributeSkill("Windows Forms", 4, group2);
 
-			nodes.Add(new Node("Name1 Surname1", size1, x1, y1, new List<AttributeBase>() { skill1, skill12, skill13, skill14 }));
+			nodes.Add(new Node("Ryan Kelvin", new List<AttributeBase>() {size1, skill1, skill12, skill13, skill14, skill15 }));
 
 			//node2
-			float x2 = 0;
-			float y2 = 0;
-			float size2 = 8;
-			var skill2 = new AttributeSkill("skill1", 1, group2);
-			var skill22 = new AttributeSkill("skill12", 8, group1);
-			var skill23 = new AttributeSkill("skill33", 6, group2);
+			var size2 = new AttributeSize(8);
+			var skill2 = new AttributeSkill("ASP.NET", 1, group2);
+			var skill22 = new AttributeSkill("Oracle", 8, group1);
+			var skill23 = new AttributeSkill("Java", 6, group2);
+			var skill24 = new AttributeSkill("SQL", 3, group2);
+			var skill25 = new AttributeSkill("Windows Forms", 4, group2);
 
-			nodes.Add(new Node("Name2 Surname2", size2, x2, y2, new List<AttributeBase>() { skill2, skill22, skill23 }));
+			nodes.Add(new Node("Taylor Murphy", new List<AttributeBase>() { size2, skill2, skill22, skill23, skill24, skill25 }));
 
 			//node3
-			float x3 = 0;
-			float y3 = 0;
-			float size3 = 6;
-			var skill3 = new AttributeSkill("skill3", 14, group2);
+			var size3 = new AttributeSize(8);
+			var skill3 = new AttributeSkill("WCF", 14, group2);
+			var skill33 = new AttributeSkill("Java", 12, group2);
+			var skill34 = new AttributeSkill("SQL", 4, group2);
 
-			var skill33 = new AttributeSkill("skill33", 15, group2);
-			var skill34 = new AttributeSkill("skill4", 4, group2);
-
-			nodes.Add(new Node("Name3 Surname3", size3, x3, y3, new List<AttributeBase>() { skill33, skill3 }));
+			nodes.Add(new Node("Anna Williams", new List<AttributeBase>() {size3, skill33, skill3, skill34 }));
 
 			//node4
-			float x4 = 0;
-			float y4 = 0;
-			float size4 = 6;
-			var skill4 = new AttributeSkill("skill4", 4, group2);
 
-			nodes.Add(new Node("Name4 Surname4", size4, x4, y4, new List<AttributeBase>() { skill4 }));
+			var skill4 = new AttributeSkill("LINQ", 4, group2);
+			var size4 = new AttributeSize(8);
+			nodes.Add(new Node("Thomas Stewart", new List<AttributeBase>() {size4, skill4 }));
 
 			return nodes;
 		}

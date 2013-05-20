@@ -95,7 +95,8 @@ namespace Endava.DependencyGraph
                 {
                     Pers1CommonSkillTotal += pers1attr[i].Weight ?? 0;
                     Pers2CommonSkillTotal += (pers2attr.Where(w => w.Name == pers1attr[i].Name)).FirstOrDefault().Weight ?? 0;
-                    commonSkills += pers1attr[i].Name + "\n";
+
+					commonSkills += pers1attr[i].Name + "\n";
                 }
             }
 
@@ -107,10 +108,11 @@ namespace Endava.DependencyGraph
             float pers1SkillSum = pers1attr.Sum(s => s.Weight) ?? 0;
             float pers2SkillSum = pers2attr.Sum(s => s.Weight) ?? 0;
 
-            double result = (pers1.Size * pers2.Size) / ((Pers1CommonSkillTotal / pers1SkillSum) * (Pers2CommonSkillTotal / pers2SkillSum));
+			double result = 0.5 * (pers1.Size * pers2.Size) / ((Pers1CommonSkillTotal / pers1SkillSum) * (Pers2CommonSkillTotal / pers2SkillSum));
 
+	        var skills = commonSkills.TrimEnd('\n');
             //return (float)System.Math.Sqrt(result * correction);
-            return new KeyValuePair<float, string>((float)System.Math.Sqrt(result * correction), commonSkills);
+			return new KeyValuePair<float, string>((float)System.Math.Sqrt(result * correction), skills);
         }
     }
 }
