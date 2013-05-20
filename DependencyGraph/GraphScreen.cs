@@ -61,14 +61,15 @@ namespace Endava.DependencyGraph
                 {
                     if ((nodes[j].IsConnected != true) && (nodes[i].Name != nodes[j].Name))
                     {
-                        float length = CalculateNodeDistance(nodes[i], nodes[j]);
+                        //float length = CalculateNodeDistance(nodes[i], nodes[j]);
+                        KeyValuePair<float, string> commonSkills = CalculateNodeDistance(nodes[i], nodes[j]);
 
-                        if (length > 0)
+                        if (commonSkills.Key > 0)
                         {
                             joints.Add(JointFactory.CreateConnector(World, bodies[i], bodies[j], 3f));
                             joints[counter].CollideConnected = true;
-                            joints[counter].Length = length;
-	                        joints[counter].UserData = "Common skills: ";
+                            joints[counter].Length = commonSkills.Key;
+                            joints[counter].UserData = commonSkills.Value;
                             counter++;
                         }
                     }
@@ -78,11 +79,12 @@ namespace Endava.DependencyGraph
             }
         }
 
-        public float CalculateNodeDistance(Node pers1, Node pers2)
+        public KeyValuePair<float, string> CalculateNodeDistance(Node pers1, Node pers2)
         {
             const float correction = 1;
             float Pers1CommonSkillTotal = 0;
             float Pers2CommonSkillTotal = 0;
+            string commonSkills = string.Empty;
 
             List<AttributeSkill> pers1attr = pers1.Attributes.OfType<AttributeSkill>().ToList();
             List<AttributeSkill> pers2attr = pers2.Attributes.OfType<AttributeSkill>().ToList();
@@ -93,12 +95,13 @@ namespace Endava.DependencyGraph
                 {
                     Pers1CommonSkillTotal += pers1attr[i].Weight ?? 0;
                     Pers2CommonSkillTotal += (pers2attr.Where(w => w.Name == pers1attr[i].Name)).FirstOrDefault().Weight ?? 0;
+                    commonSkills += pers1attr[i].Name + "\n";
                 }
             }
 
             if (Pers1CommonSkillTotal == 0 || Pers2CommonSkillTotal == 0)
             {
-                return 0;
+                return new KeyValuePair<float,string>(0, string.Empty);
             }
 
             float pers1SkillSum = pers1attr.Sum(s => s.Weight) ?? 0;
@@ -106,7 +109,8 @@ namespace Endava.DependencyGraph
 
             double result = (pers1.Size * pers2.Size) / ((Pers1CommonSkillTotal / pers1SkillSum) * (Pers2CommonSkillTotal / pers2SkillSum));
 
-            return (float)System.Math.Sqrt(result * correction);
+            //return (float)System.Math.Sqrt(result * correction);
+            return new KeyValuePair<float, string>((float)System.Math.Sqrt(result * correction), commonSkills);
         }
     }
 }
