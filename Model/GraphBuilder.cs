@@ -33,7 +33,7 @@ namespace Endava.DependencyGraph
 			var skill2 = new AttributeSkill("ASP.NET", 1, group2);
 			var skill22 = new AttributeSkill("Oracle", 8, group1);
 			var skill23 = new AttributeSkill("Java", 6, group2);
-			var skill24 = new AttributeSkill("SQL", 3, group2);
+			var skill24 = new AttributeSkill("SQL", 3, group1);
 			var skill25 = new AttributeSkill("Windows Forms", 4, group2);
 
 			nodes.Add(new Node("Taylor Murphy", new List<AttributeBase>() { size2, skill2, skill22, skill23, skill24, skill25 }));

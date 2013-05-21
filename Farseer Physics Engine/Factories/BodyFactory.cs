@@ -37,7 +37,7 @@ namespace FarseerPhysics.Factories
 			Vertices rectangleVertices = PolygonTools.CreateRectangle(width / 5, height / 2.5f);
 			PolygonShape rectangleShape = new PolygonShape(rectangleVertices, 1);
 
-			BodyDescription bodyDescription = new BodyDescription(description, new Size(width, height), FigureType.Tooltip);
+			BodyDescription bodyDescription = new BodyDescription(description, new Size(width, height), FigureType.Tooltip, System.Windows.Media.Colors.Transparent);
 
 			Body body = CreateBody(world, position);
 			body.CreateFixture(rectangleShape, bodyDescription);

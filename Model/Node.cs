@@ -2,42 +2,75 @@
 using System.Linq;
 using System.Collections.Generic;
 using MvvmFoundation.Wpf;
+using System.Windows.Media;
 
 namespace Endava.DependencyGraph
 {
-	public class Node : ObservableObject
-	{
-		public Node(string name)
-		{
-			Name = name;
-			IsConnected = false;
-		}
+    public class Node : ObservableObject
+    {
+        public string Name { get; set; }
+        public List<AttributeBase> Attributes { get; set; }
+        public bool IsConnected { get; set; }
 
-		private string Color { get; set; }
+        public Node(string name)
+        {
+            Name = name;
+            IsConnected = false;
+        }
 
-		public Node(string name, List<AttributeBase> attributes)
-		{
-			Name = name;
-			Color = getColor();
-			Attributes = attributes;
-			IsConnected = false;
-		}
+        public Node(string name, List<AttributeBase> attributes)
+        {
+            Name = name;
+            //Color = getColor();
+            Attributes = attributes;
+            IsConnected = false;
+        }
 
-		public float Size
-		{
-			get { return Attributes.OfType<AttributeSize>().First().Size; }
-		}
+        public float Size
+        {
+            get { return Attributes.OfType<AttributeSize>().First().Size; }
+        }
 
-		private string getColor()
-		{
-			// grupate skillurile dupa grup, facuta suma, si scos maximum
-			//Attributes.OfType<AttributeSkill>().Select(x => x.Weight).Distinct()
-			
-			return String.Empty;
-		}
+        public Color Color
+        {
+            get
+            {
+                //var attr = Attributes.OfType<AttributeSkill>().GroupBy(g => g.Group.Name).Select(s => s.Sum(sum => sum.Weight));
 
-		public string Name { get; set; }
-		public List<AttributeBase> Attributes { get; set; }
-		public bool IsConnected { get; set; }
-	}
+                string group = GetPrimeGroup(Attributes.OfType<AttributeSkill>());
+
+                switch (group)
+                {
+                    case "Group1":
+                        return Colors.Orange;
+                        break;
+                    case "Group2":
+                        return Colors.YellowGreen;
+                        break;
+                    default:
+                        return Colors.Transparent;
+                        break;
+                }
+            }
+        }
+
+        private string GetPrimeGroup(IEnumerable<AttributeSkill> skills)
+        {
+            Dictionary<string, float?> weight = new Dictionary<string, float?>();
+
+            foreach (var skill in skills)
+            {
+                if (!weight.ContainsKey(skill.Group.Name))
+                {
+                    weight.Add(skill.Group.Name, skill.Weight);
+                }
+                else
+                {
+                    weight[skill.Group.Name] += skill.Weight;
+                }
+            }
+
+            return weight.OrderByDescending(o => o.Value).First().Key;
+        }
+    }
 }

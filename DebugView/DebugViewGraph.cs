@@ -180,7 +180,7 @@ namespace Endava.DependencyGraph
                     Color color = Colors.Transparent;
                     if (b.UserData != null)
                     {
-                        color = Colors.Orange;
+                        color = ((BodyDescription)b.UserData).Color;
                     }
 
                     foreach (Fixture f in b.FixtureList)
@@ -362,8 +362,6 @@ namespace Endava.DependencyGraph
                             vertices[i] = MathUtils.Multiply(ref xf, poly.Vertices[i]);
                         }
 
-                        //Color fillcolor = (Color)ColorConverter.ConvertFromString("#80FFFFFF"); //#80FFFFFF
-
 						if (fixture.UserData == null) fixture.UserData = "";
 
 	                    var bodyDescription = fixture.Body.UserData as BodyDescription;
@@ -383,29 +381,6 @@ namespace Endava.DependencyGraph
 				                    break;
 		                    }
 	                    }
-
-	                    #region ...
-                        //DrawSolidPolygon(vertices, vertexCount, color);
-
-                        //string description = fixture.UserData.ToString();
-                        //if (!String.IsNullOrEmpty(description) && !description.Equals("Static"))
-                        //{
-                        //    TextBlock text = new TextBlock();
-                        //    text.Text = description;
-                        //    text.Width = 40;
-                        //    text.Height = 20;
-                        //    text.TextWrapping = TextWrapping.Wrap;
-                        //    text.TextAlignment = TextAlignment.Center;
-                        //    text.RenderTransform = new ScaleTransform(1, 1);
-
-                        //    var position = Transform.Transform(new Point(fixture.Body.Position.X, fixture.Body.Position.Y));
-
-                        //    Canvas.SetLeft(text, position.X - 20);
-                        //    Canvas.SetTop(text, position.Y - 9);
-
-                        //    _debugCanvas.Children.Add(text);
-                        //}
-                        #endregion
                     }
                     break;
 

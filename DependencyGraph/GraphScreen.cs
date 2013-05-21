@@ -49,7 +49,7 @@ namespace Endava.DependencyGraph
             // sets bodies
             for (int i = 0; i < nodes.Count; i++)
             {
-				BodyDescription bodyDescription = new BodyDescription(nodes[i].Name, nodes[i].Size, FigureType.Node);
+                BodyDescription bodyDescription = new BodyDescription(nodes[i].Name, nodes[i].Size, FigureType.Node, nodes[i].Color);
 				bodies.Add(BodyFactory.CreateNode(World, (nodes[i].Size / 3), new Vector2(), bodyDescription));
             }
 
