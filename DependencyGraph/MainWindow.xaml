@@ -2,10 +2,10 @@
 		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:local="clr-namespace:Endava.DependencyGraph"
-		Title="DependencyGraph" Width="1000" Height="1038" WindowStartupLocation="CenterScreen">
+		Title="DependencyGraph" Width="1500" Height="1000" WindowStartupLocation="CenterScreen" VerticalAlignment="Center" HorizontalAlignment="Center">
 
 	<Grid x:Name="LayoutRoot">
-		<local:DependencyGraphView  />
+		<local:DependencyGraphView VerticalAlignment="Center" HorizontalAlignment="Center"  />
 	</Grid>
 	
 </Window>

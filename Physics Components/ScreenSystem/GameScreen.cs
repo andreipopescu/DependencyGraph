@@ -294,10 +294,10 @@ namespace Endava.DependencyGraph.ScreenSystem
 		private bool IsMouseOnConnector(Vector2 p, Joint joint)
 		{
 			//convert pixels to Vector2 measures
-			var tolerance = joint.Thickness / 2.5;
+            float tolerance = joint.Thickness / 2.5f;
 
-			var startPoint = joint.WorldAnchorA;
-			var endPoint = joint.WorldAnchorB;
+			Vector2 startPoint = joint.WorldAnchorA;
+			Vector2 endPoint = joint.WorldAnchorB;
 
 			Math.Abs(joint.WorldAnchorA.X);
 
@@ -332,7 +332,7 @@ namespace Endava.DependencyGraph.ScreenSystem
 
 			// If the line is straight, the earlier boundary check is enough to determine that the point is on the line.
 			// Also prevents division by zero exceptions.
-			if ((Math.Abs(deltaX) <= tolerance / 7) || (Math.Abs(deltaY) <= tolerance / 12))
+			if ((Math.Abs(deltaX) <= tolerance / 7) || (Math.Abs(deltaY) <= tolerance / 10))
 			{
 				return true;
 			}
@@ -341,9 +341,9 @@ namespace Endava.DependencyGraph.ScreenSystem
 			double calculatedY = p.X * slope + offset;
 
 			// Check calculated Y matches the points Y coord with some easing.
-			bool lineContains = p.Y - tolerance <= calculatedY && calculatedY <= p.Y + tolerance;
+            bool lineContains = p.Y - tolerance <= calculatedY && calculatedY <= p.Y + tolerance;
 
-			return lineContains;
+            return lineContains;
 		}
 
 		private void MouseDown(Vector2 p)

@@ -6,7 +6,7 @@ using System.Windows.Media;
 
 namespace Endava.DependencyGraph
 {
-    public class Node : ObservableObject
+    public class Node
     {
         public string Name { get; set; }
         public List<AttributeBase> Attributes { get; set; }
@@ -35,8 +35,6 @@ namespace Endava.DependencyGraph
         {
             get
             {
-                //var attr = Attributes.OfType<AttributeSkill>().GroupBy(g => g.Group.Name).Select(s => s.Sum(sum => sum.Weight));
-
                 string group = GetPrimeGroup(Attributes.OfType<AttributeSkill>());
 
                 switch (group)

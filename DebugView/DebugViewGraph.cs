@@ -362,7 +362,10 @@ namespace Endava.DependencyGraph
                             vertices[i] = MathUtils.Multiply(ref xf, poly.Vertices[i]);
                         }
 
-						if (fixture.UserData == null) fixture.UserData = "";
+                        if (fixture.UserData == null)
+                        {
+                            fixture.UserData = string.Empty; 
+                        }
 
 	                    var bodyDescription = fixture.Body.UserData as BodyDescription;
 	                    if (bodyDescription == null)
@@ -469,6 +472,7 @@ namespace Endava.DependencyGraph
             Polygon poly = new Polygon();
             poly.Fill = new SolidColorBrush(fillColor);
             poly.Stroke = new SolidColorBrush(strokeColor);
+
 
             for (int i = 0; i < count; i++)
             {

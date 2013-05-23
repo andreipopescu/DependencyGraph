@@ -4,13 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="1000" d:DesignWidth="1000">
+             d:DesignHeight="1000" d:DesignWidth="1500">
 
-	<Canvas x:Name="LayoutRoot" Background="SteelBlue" Width="1000" Height="1000">
-		<Canvas x:Name="Game" Background="Transparent" Width="1000" Height="1000"></Canvas>
-		<Canvas x:Name="DebugCanvas" Background="Transparent" Width="1000" Height="1000">
+    <Canvas x:Name="LayoutRoot" Background="SteelBlue" Width="1500" Height="1000">
+        <Canvas x:Name="Game" Background="Transparent" Width="1500" Height="1000"></Canvas>
+		<Canvas x:Name="DebugCanvas" Background="Transparent" Width="1500" Height="1000" HorizontalAlignment="Center" VerticalAlignment="Center">
 			<Canvas.Clip>
-				<RectangleGeometry Rect="0,0,1000,1000"></RectangleGeometry>
+                <RectangleGeometry Rect="0,0,1500,1000" ></RectangleGeometry>
 			</Canvas.Clip>
 		</Canvas>
 		<TextBlock Canvas.Left="45" Canvas.Top="24" Height="23" Name="txtFPS" Text="FPS" Foreground="White" />
